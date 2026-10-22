@@ -315,7 +315,7 @@ footer .logo { font-size: 1rem; display: block; margin-bottom: 12px; }
   <p class="lead">A miniature F1 car built to F1 in Schools regulations, powered by compressed air.</p>
   <div class="car" id="car-viewer" style="height: 460px;">
     <div class="label">AERIAL A1 · SCALE MODEL · DRAG TO ROTATE</div>
-    <div id="car-loading" style="position:absolute;inset:0;display:grid;place-items:center;color:var(--turq);font-family:'Orbitron',sans-serif;letter-spacing:3px;font-size:0.9rem;">LOADING MODEL…</div>
+    <div id="car-loading" style="position:absolute;inset:0;display:grid;place-items:center;color:var(--turq);font-family:'Orbitron',sans-serif;letter-spacing:3px;font-size:0.9rem;">LOADING MODEL...</div>
   </div>
   <div class="grid grid-3" style="margin-top: 32px;">
     <div class="card reveal"><h3>Power</h3><p>Compressed-air CO₂ cartridge, regulated for consistent launches.</p></div>
@@ -388,11 +388,16 @@ if (container) {
 
   const material = new THREE.MeshStandardMaterial({
     color: 0x00d4e8,
-    metalness: 0.5,
-    roughness: 0.3,
+    metalness: 0.4,
+    roughness: 0.35,
     emissive: 0x001a22,
-    emissiveIntensity: 0.3
+    emissiveIntensity: 0.25,
+    side: THREE.DoubleSide
   });
+  const grid = new THREE.GridHelper(4, 20, 0x00e5ff, 0x003344);
+  grid.material.opacity = 0.35;
+  grid.material.transparent = true;
+  scene.add(grid);
 
   const loader = new STLLoader();
   loader.load('car.stl', (geometry) => {
