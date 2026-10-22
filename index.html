@@ -389,11 +389,17 @@ if (container) {
 
   const material = new THREE.MeshStandardMaterial({
     color: 0x00d4e8,
-    metalness: 0.4,
-    roughness: 0.35,
+    metalness: 0.7,
+    roughness: 0.25,
     emissive: 0x001a22,
-    emissiveIntensity: 0.25,
+    emissiveIntensity: 0.15,
     side: THREE.DoubleSide
+  });
+  const wireMaterial = new THREE.MeshBasicMaterial({
+    color: 0x00e5ff,
+    wireframe: true,
+    transparent: true,
+    opacity: 0.18
   });
   const grid = new THREE.GridHelper(4, 20, 0x00e5ff, 0x003344);
   grid.material.opacity = 0.35;
@@ -404,14 +410,18 @@ if (container) {
   loader.load('car.stl', (geometry) => {
     geometry.computeVertexNormals();
     const mesh = new THREE.Mesh(geometry, material);
+    const wire = new THREE.Mesh(geometry, wireMaterial);
     const box = new THREE.Box3().setFromObject(mesh);
     const center = box.getCenter(new THREE.Vector3());
     const size = box.getSize(new THREE.Vector3());
     mesh.position.sub(center);
+    wire.position.copy(mesh.position);
     const maxDim = Math.max(size.x, size.y, size.z);
     const scale = 3.2 / maxDim;
     mesh.scale.setScalar(scale);
+    wire.scale.setScalar(scale);
     scene.add(mesh);
+    scene.add(wire);
     // fit camera
     const dist = maxDim * scale * 1.6;
     camera.position.set(dist * 0.8, dist * 0.5, dist * 1.0);
