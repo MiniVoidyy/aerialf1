@@ -35,17 +35,36 @@ body::before {
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(ellipse at 20% 10%, rgba(0, 229, 255, 0.15), transparent 50%),
-    radial-gradient(ellipse at 80% 90%, rgba(0, 188, 212, 0.12), transparent 50%);
+    radial-gradient(ellipse at 20% 10%, rgba(0, 229, 255, 0.18), transparent 50%),
+    radial-gradient(ellipse at 80% 90%, rgba(0, 188, 212, 0.14), transparent 50%);
   pointer-events: none;
   z-index: 0;
+  filter: blur(40px);
+}
+.blur-orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.55;
+  pointer-events: none;
+  z-index: 0;
+  animation: drift 14s ease-in-out infinite;
+}
+.blur-orb.o1 { width: 420px; height: 420px; background: #00e5ff; top: -120px; left: -80px; }
+.blur-orb.o2 { width: 360px; height: 360px; background: #00bcd4; bottom: -100px; right: -60px; animation-delay: -5s; }
+.blur-orb.o3 { width: 260px; height: 260px; background: #00838f; top: 40%; left: 45%; animation-delay: -9s; opacity: 0.35; }
+@keyframes drift {
+  0%,100% { transform: translate(0,0) scale(1); }
+  33% { transform: translate(40px,-30px) scale(1.1); }
+  66% { transform: translate(-30px,40px) scale(0.95); }
 }
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 50;
   display: flex; align-items: center; justify-content: space-between;
   padding: 18px 48px;
-  background: rgba(5, 10, 20, 0.7);
-  backdrop-filter: blur(14px);
+  background: rgba(5, 10, 20, 0.55);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
   border-bottom: 1px solid var(--border);
 }
 .logo {
@@ -135,6 +154,8 @@ section .lead { color: var(--muted); max-width: 640px; font-size: 1.05rem; margi
 .card {
   background: var(--card); border: 1px solid var(--border);
   border-radius: 16px; padding: 32px; overflow: hidden;
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
   transition: transform .35s, border-color .35s, box-shadow .35s;
   position: relative;
 }
@@ -165,6 +186,8 @@ section .lead { color: var(--muted); max-width: 640px; font-size: 1.05rem; margi
   position: relative; height: 260px;
   background: linear-gradient(135deg, var(--bg2), #0d2240);
   border-radius: 16px; border: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   overflow: hidden; display: grid; place-items: center;
 }
 .car .shape {
@@ -182,7 +205,9 @@ section .lead { color: var(--muted); max-width: 640px; font-size: 1.05rem; margi
 .milestone {
   display: grid; grid-template-columns: 80px 1fr; gap: 20px; align-items: center;
   padding: 18px 24px; background: var(--card); border: 1px solid var(--border);
-  border-radius: 12px; transition: border-color .3s, transform .3s;
+  border-radius: 12px; backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  transition: border-color .3s, transform .3s;
 }
 .milestone:hover { border-color: var(--turq); transform: translateX(6px); }
 .milestone .step { font-family: 'Orbitron', sans-serif; font-weight: 700; color: var(--turq); font-size: 0.9rem; }
@@ -208,6 +233,9 @@ footer .logo { font-size: 1rem; display: block; margin-bottom: 12px; }
 </style>
 </head>
 <body>
+<div class="blur-orb o1"></div>
+<div class="blur-orb o2"></div>
+<div class="blur-orb o3"></div>
 <nav>
   <div class="logo">AERIAL<span> F1</span></div>
   <ul>
