@@ -313,8 +313,9 @@ footer .logo { font-size: 1rem; display: block; margin-bottom: 12px; }
   <div class="section-tag">The Car</div>
   <h2>Aerial A1 — scale model.</h2>
   <p class="lead">A miniature F1 car built to F1 in Schools regulations, powered by compressed air.</p>
-  <div class="car reveal" id="car-viewer" style="height: 460px;">
+  <div class="car" id="car-viewer" style="height: 460px;">
     <div class="label">AERIAL A1 · SCALE MODEL · DRAG TO ROTATE</div>
+    <div id="car-loading" style="position:absolute;inset:0;display:grid;place-items:center;color:var(--turq);font-family:'Orbitron',sans-serif;letter-spacing:3px;font-size:0.9rem;">LOADING MODEL…</div>
   </div>
   <div class="grid grid-3" style="margin-top: 32px;">
     <div class="card reveal"><h3>Power</h3><p>Compressed-air CO₂ cartridge, regulated for consistent launches.</p></div>
@@ -356,36 +357,41 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 const container = document.getElementById('car-viewer');
 if (container) {
+  const loadingEl = document.getElementById('car-loading');
   const scene = new THREE.Scene();
-  scene.background = null;
   const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
-  camera.position.set(0, 0, 4);
+  camera.position.set(2.5, 1.8, 2.5);
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
   renderer.setSize(container.clientWidth, container.clientHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
   container.appendChild(renderer.domElement);
 
   const controls = new OrbitControls(camera, renderer.domElement);
   controls.enableDamping = true;
   controls.dampingFactor = 0.08;
   controls.autoRotate = true;
-  controls.autoRotateSpeed = 1.2;
+  controls.autoRotateSpeed = 0.9;
   controls.enablePan = false;
+  controls.target.set(0, 0, 0);
 
-  scene.add(new THREE.AmbientLight(0xffffff, 0.6));
-  const key = new THREE.DirectionalLight(0x00e5ff, 1.2);
-  key.position.set(3, 4, 5);
+  scene.add(new THREE.AmbientLight(0xffffff, 0.7));
+  const key = new THREE.DirectionalLight(0xffffff, 1.1);
+  key.position.set(4, 6, 5);
   scene.add(key);
-  const rim = new THREE.DirectionalLight(0x00bcd4, 0.8);
-  rim.position.set(-4, 2, -3);
+  const rim = new THREE.DirectionalLight(0x00e5ff, 1.4);
+  rim.position.set(-4, 2, -4);
   scene.add(rim);
+  const fill = new THREE.DirectionalLight(0x00bcd4, 0.6);
+  fill.position.set(0, -3, 2);
+  scene.add(fill);
 
   const material = new THREE.MeshStandardMaterial({
-    color: 0x00bcd4,
-    metalness: 0.6,
-    roughness: 0.35,
-    emissive: 0x003344,
-    emissiveIntensity: 0.25
+    color: 0x00d4e8,
+    metalness: 0.5,
+    roughness: 0.3,
+    emissive: 0x001a22,
+    emissiveIntensity: 0.3
   });
 
   const loader = new STLLoader();
@@ -396,10 +402,20 @@ if (container) {
     const center = box.getCenter(new THREE.Vector3());
     const size = box.getSize(new THREE.Vector3());
     mesh.position.sub(center);
-    const scale = 2.6 / Math.max(size.x, size.y, size.z);
+    const maxDim = Math.max(size.x, size.y, size.z);
+    const scale = 2.4 / maxDim;
     mesh.scale.setScalar(scale);
     scene.add(mesh);
-  }, undefined, (err) => { console.error('STL load error', err); });
+    // fit camera
+    const dist = maxDim * scale * 2.2;
+    camera.position.set(dist * 0.7, dist * 0.5, dist * 0.9);
+    camera.lookAt(0, 0, 0);
+    controls.update();
+    if (loadingEl) loadingEl.style.display = 'none';
+  }, undefined, (err) => {
+    console.error('STL load error', err);
+    if (loadingEl) loadingEl.textContent = 'FAILED TO LOAD MODEL';
+  });
 
   function animate() {
     requestAnimationFrame(animate);
@@ -409,6 +425,7 @@ if (container) {
   animate();
 
   window.addEventListener('resize', () => {
+    if (!container.clientWidth) return;
     camera.aspect = container.clientWidth / container.clientHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(container.clientWidth, container.clientHeight);
