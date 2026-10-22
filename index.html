@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Aerial F1 Team</title>
-<meta name="description" content="Aerial Racing — Formula 1 team. Turquoise speed, precision engineering.">
+<meta name="description" content="Aerial Racing — school F1 in Schools team. Turquoise speed, STEM engineering.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -114,23 +114,6 @@ nav a:hover { color: var(--turq); }
   border: 1px solid var(--border);
 }
 .btn-ghost:hover { background: var(--turq-dim); transform: translateY(-2px); }
-.stats {
-  position: relative; z-index: 1;
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
-  max-width: 1100px; margin: -60px auto 0; padding: 0 48px;
-}
-.stat {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: 14px; padding: 28px; text-align: center;
-  backdrop-filter: blur(8px);
-  transition: transform .3s, border-color .3s;
-}
-.stat:hover { transform: translateY(-4px); border-color: var(--turq); }
-.stat .num {
-  font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 2.4rem;
-  color: var(--turq); text-shadow: 0 0 20px rgba(0, 229, 255, 0.4);
-}
-.stat .lbl { color: var(--muted); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; margin-top: 6px; }
 section {
   position: relative; z-index: 1;
   padding: 120px 48px;
@@ -164,20 +147,20 @@ section .lead { color: var(--muted); max-width: 640px; font-size: 1.05rem; margi
 .card:hover::after { opacity: 1; }
 .card h3 { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; margin-bottom: 10px; color: var(--turq); }
 .card p { color: var(--muted); font-size: 0.95rem; }
-.driver {
+.member {
   display: flex; align-items: center; gap: 20px;
 }
-.driver .avatar {
+.member .avatar {
   width: 72px; height: 72px; border-radius: 50%;
   background: linear-gradient(135deg, var(--turq3), var(--turq));
   display: grid; place-items: center;
-  font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 1.4rem; color: #001018;
+  font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 1.1rem; color: #001018;
   box-shadow: 0 0 25px rgba(0, 229, 255, 0.4);
   flex-shrink: 0;
 }
-.driver .info h3 { color: var(--text); margin-bottom: 2px; }
-.driver .info .role { color: var(--turq); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; }
-.driver .info p { margin-top: 6px; }
+.member .info h3 { color: var(--text); margin-bottom: 2px; font-size: 1rem; }
+.member .info .role { color: var(--turq); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; }
+.member .info p { margin-top: 6px; }
 .car {
   position: relative; height: 260px;
   background: linear-gradient(135deg, var(--bg2), #0d2240);
@@ -195,16 +178,16 @@ section .lead { color: var(--muted); max-width: 640px; font-size: 1.05rem; margi
   position: absolute; bottom: 18px; left: 24px;
   font-family: 'Orbitron', sans-serif; font-size: 0.9rem; letter-spacing: 3px; color: var(--turq);
 }
-.schedule { display: flex; flex-direction: column; gap: 12px; }
-.race {
-  display: grid; grid-template-columns: 60px 1fr auto; gap: 20px; align-items: center;
+.milestones { display: flex; flex-direction: column; gap: 12px; }
+.milestone {
+  display: grid; grid-template-columns: 80px 1fr; gap: 20px; align-items: center;
   padding: 18px 24px; background: var(--card); border: 1px solid var(--border);
   border-radius: 12px; transition: border-color .3s, transform .3s;
 }
-.race:hover { border-color: var(--turq); transform: translateX(6px); }
-.race .round { font-family: 'Orbitron', sans-serif; font-weight: 700; color: var(--turq); }
-.race .name { font-weight: 600; }
-.race .date { color: var(--muted); font-size: 0.85rem; }
+.milestone:hover { border-color: var(--turq); transform: translateX(6px); }
+.milestone .step { font-family: 'Orbitron', sans-serif; font-weight: 700; color: var(--turq); font-size: 0.9rem; }
+.milestone .name { font-weight: 600; }
+.milestone .date { color: var(--muted); font-size: 0.85rem; }
 footer {
   position: relative; z-index: 1;
   padding: 48px; text-align: center; color: var(--muted);
@@ -220,7 +203,6 @@ footer .logo { font-size: 1rem; display: block; margin-bottom: 12px; }
   nav { padding: 14px 20px; }
   nav ul { gap: 16px; }
   section, .hero { padding-left: 20px; padding-right: 20px; }
-  .stats { grid-template-columns: repeat(2, 1fr); margin-top: 0; padding: 0 20px; }
   .grid-3, .grid-2 { grid-template-columns: 1fr; }
 }
 </style>
@@ -230,61 +212,70 @@ footer .logo { font-size: 1rem; display: block; margin-bottom: 12px; }
   <div class="logo">AERIAL<span> F1</span></div>
   <ul>
     <li><a href="#about">Team</a></li>
-    <li><a href="#drivers">Drivers</a></li>
+    <li><a href="#members">Members</a></li>
     <li><a href="#car">Car</a></li>
-    <li><a href="#calendar">Calendar</a></li>
+    <li><a href="#milestones">Project</a></li>
   </ul>
 </nav>
 
 <header class="hero">
   <div>
-    <span class="tag">Formula 1 · Season 2026</span>
+    <span class="tag">School Project · F1 in Schools</span>
     <h1>AERIAL<span class="stroke"> RACING</span></h1>
-    <p>Born from the sky. Engineered for the ground. Aerial Racing brings turquoise speed to the pinnacle of motorsport — precision, passion, and pure velocity.</p>
+    <p>Our school's Formula 1 in Schools team. We design, build and race a scale model F1 car — learning engineering, aerodynamics and teamwork along the way.</p>
     <div class="cta">
-      <a class="btn btn-primary" href="#about">Discover the Team</a>
-      <a class="btn btn-ghost" href="#calendar">Race Calendar</a>
+      <a class="btn btn-primary" href="#about">About the Project</a>
+      <a class="btn btn-ghost" href="#car">See the Car</a>
     </div>
   </div>
 </header>
 
-<div class="stats">
-  <div class="stat"><div class="num">47</div><div class="lbl">Race Wins</div></div>
-  <div class="stat"><div class="num">3</div><div class="lbl">Constructors' Titles</div></div>
-  <div class="stat"><div class="num">89</div><div class="lbl">Podiums</div></div>
-  <div class="stat"><div class="num">12</div><div class="lbl">Pole Positions</div></div>
-</div>
-
 <section id="about">
-  <div class="section-tag">The Team</div>
-  <h2>Built to fly.<br>Engineered to win.</h2>
-  <p class="lead">Aerial Racing was founded on a single belief: that the line between aviation and motorsport is thinner than it looks. Every curve, every gram, every airflow decision is treated like an aircraft — because at 340 km/h, that's exactly what the car becomes.</p>
+  <div class="section-tag">The Project</div>
+  <h2>F1 in Schools.<br>STEM in action.</h2>
+  <p class="lead">F1 in Schools is a global STEM competition where students design, manufacture and race miniature Formula 1 cars. Our team, Aerial Racing, takes part as a school project — combining engineering, design and project management.</p>
   <div class="grid grid-3">
-    <div class="card reveal"><h3>Precision Aero</h3><p>Wind-tunnel developed aero packages tuned for maximum downforce with minimal drag, inspired by aerospace engineering.</p></div>
-    <div class="card reveal"><h3>Turquoise Power</h3><p>A hybrid power unit delivering relentless torque, wrapped in our signature turquoise livery that cuts through the grid.</p></div>
-    <div class="card reveal"><h3>Race Intelligence</h3><p>Real-time telemetry and AI-assisted strategy, turning every lap into a data-driven advantage.</p></div>
+    <div class="card reveal"><h3>Design</h3><p>CAD modelling and aerodynamic shaping of our scale model car, tested in a virtual wind tunnel.</p></div>
+    <div class="card reveal"><h3>Manufacture</h3><p>CNC machining and 3D printing to bring the design to life with precision and care.</p></div>
+    <div class="card reveal"><h3>Race</h3><p>Compressed-air powered racing on a 20-metre track, timed to the millisecond.</p></div>
   </div>
 </section>
 
-<section id="drivers">
-  <div class="section-tag">Drivers</div>
-  <h2>The pilots.</h2>
-  <p class="lead">Two drivers, one mission — push the Aerial A1 to its absolute limit, every single weekend.</p>
+<section id="members">
+  <div class="section-tag">Team</div>
+  <h2>The team.</h2>
+  <p class="lead">A small group of students sharing roles across design, engineering and presentation.</p>
   <div class="grid grid-2">
-    <div class="card reveal driver">
-      <div class="avatar">MV</div>
+    <div class="card reveal member">
+      <div class="avatar">D</div>
       <div class="info">
-        <div class="role">Driver 01</div>
-        <h3>Marcus Voss</h3>
-        <p>Championship contender. Known for late-braking overtakes and ice-cold race craft under pressure.</p>
+        <div class="role">Design Lead</div>
+        <h3>Design & Aero</h3>
+        <p>Responsible for CAD, body shape and aerodynamic testing.</p>
       </div>
     </div>
-    <div class="card reveal driver">
-      <div class="avatar">LK</div>
+    <div class="card reveal member">
+      <div class="avatar">M</div>
       <div class="info">
-        <div class="role">Driver 02</div>
-        <h3>Lena Kovač</h3>
-        <p>Rising star. Blistering one-lap pace and fearless wheel-to-wheel racing through the field.</p>
+        <div class="role">Manufacture Lead</div>
+        <h3>Build & Assembly</h3>
+        <p>Handles machining, printing and final car assembly.</p>
+      </div>
+    </div>
+    <div class="card reveal member">
+      <div class="avatar">P</div>
+      <div class="info">
+        <div class="role">Project Manager</div>
+        <h3>Planning & Budget</h3>
+        <p>Coordinates schedule, sponsors and team workflow.</p>
+      </div>
+    </div>
+    <div class="card reveal member">
+      <div class="avatar">Mk</div>
+      <div class="info">
+        <div class="role">Marketing Lead</div>
+        <h3>Branding & Pitch</h3>
+        <p>Manages identity, social media and the verbal presentation.</p>
       </div>
     </div>
   </div>
@@ -292,36 +283,35 @@ footer .logo { font-size: 1rem; display: block; margin-bottom: 12px; }
 
 <section id="car">
   <div class="section-tag">The Car</div>
-  <h2>Aerial A1 — 2026.</h2>
-  <p class="lead">A ground-effect masterpiece. Every surface shaped by airflow, every detail tuned for the turquoise blur.</p>
+  <h2>Aerial A1 — scale model.</h2>
+  <p class="lead">A miniature F1 car built to F1 in Schools regulations, powered by compressed air.</p>
   <div class="car reveal">
     <div class="shape"></div>
-    <div class="label">AERIAL A1 · 2026</div>
+    <div class="label">AERIAL A1 · SCALE MODEL</div>
   </div>
   <div class="grid grid-3" style="margin-top: 32px;">
-    <div class="card reveal"><h3>Power Unit</h3><p>1.6L V6 Turbo Hybrid · 1000+ hp combined output.</p></div>
-    <div class="card reveal"><h3>Chassis</h3><p>Carbon-fibre monocoque, aerospace-grade, ultra-lightweight.</p></div>
-    <div class="card reveal"><h3>Aero</h3><p>Active aero front wing, DRS-integrated rear wing.</p></div>
+    <div class="card reveal"><h3>Power</h3><p>Compressed-air CO₂ cartridge, regulated for consistent launches.</p></div>
+    <div class="card reveal"><h3>Materials</h3><p>CNC-machined body with 3D-printed wings and components.</p></div>
+    <div class="card reveal"><h3>Aero</h3><p>Front and rear wings tuned for downforce on the track.</p></div>
   </div>
 </section>
 
-<section id="calendar">
-  <div class="section-tag">Calendar</div>
-  <h2>2026 Race Calendar.</h2>
-  <p class="lead">Twenty-four rounds. One turquoise line cutting across the world.</p>
-  <div class="schedule">
-    <div class="race reveal"><div class="round">R01</div><div><div class="name">Bahrain Grand Prix</div><div class="date">Sakhir · Mar 8</div></div><div class="date">Race</div></div>
-    <div class="race reveal"><div class="round">R02</div><div><div class="name">Saudi Arabian Grand Prix</div><div class="date">Jeddah · Mar 22</div></div><div class="date">Race</div></div>
-    <div class="race reveal"><div class="round">R03</div><div><div class="name">Australian Grand Prix</div><div class="date">Melbourne · Apr 5</div></div><div class="date">Race</div></div>
-    <div class="race reveal"><div class="round">R04</div><div><div class="name">Japanese Grand Prix</div><div class="date">Suzuka · Apr 19</div></div><div class="date">Race</div></div>
-    <div class="race reveal"><div class="round">R05</div><div><div class="name">Miami Grand Prix</div><div class="date">Miami · May 3</div></div><div class="date">Race</div></div>
+<section id="milestones">
+  <div class="section-tag">Project</div>
+  <h2>Project milestones.</h2>
+  <p class="lead">From first sketch to race day — our journey through the competition.</p>
+  <div class="milestones">
+    <div class="milestone reveal"><div class="step">01</div><div><div class="name">Concept & Design</div><div class="date">CAD modelling and aero testing</div></div></div>
+    <div class="milestone reveal"><div class="step">02</div><div><div class="name">Manufacture</div><div class="date">Machining and assembly of the car</div></div></div>
+    <div class="milestone reveal"><div class="step">03</div><div><div class="name">Testing</div><div class="date">Track runs and refinement</div></div></div>
+    <div class="milestone reveal"><div class="step">04</div><div><div class="name">Competition</div><div class="date">Regional F1 in Schools event</div></div></div>
   </div>
 </section>
 
 <footer>
   <span class="logo">AERIAL F1</span>
-  © 2026 Aerial Racing Team. All rights reserved.<br>
-  Fan-made concept site · Not affiliated with Formula 1.
+  School F1 in Schools project · Not affiliated with Formula 1.<br>
+  Built with care by the Aerial Racing team.
 </footer>
 
 <script>
