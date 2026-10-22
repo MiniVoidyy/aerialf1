@@ -359,9 +359,10 @@ const container = document.getElementById('car-viewer');
 if (container) {
   const loadingEl = document.getElementById('car-loading');
   const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x0a1628);
   const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
   camera.position.set(2.5, 1.8, 2.5);
-  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
   renderer.setSize(container.clientWidth, container.clientHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -408,12 +409,12 @@ if (container) {
     const size = box.getSize(new THREE.Vector3());
     mesh.position.sub(center);
     const maxDim = Math.max(size.x, size.y, size.z);
-    const scale = 2.4 / maxDim;
+    const scale = 3.2 / maxDim;
     mesh.scale.setScalar(scale);
     scene.add(mesh);
     // fit camera
-    const dist = maxDim * scale * 2.2;
-    camera.position.set(dist * 0.7, dist * 0.5, dist * 0.9);
+    const dist = maxDim * scale * 1.6;
+    camera.position.set(dist * 0.8, dist * 0.5, dist * 1.0);
     camera.lookAt(0, 0, 0);
     controls.update();
     if (loadingEl) loadingEl.style.display = 'none';
