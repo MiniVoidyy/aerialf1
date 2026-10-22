@@ -321,7 +321,7 @@ footer .logo { font-size: 1rem; display: block; margin-bottom: 12px; }
   <h2>Aerial A1 — scale model.</h2>
   <p class="lead">A miniature F1 car built to F1 in Schools regulations, powered by compressed air.</p>
   <div class="car" id="car-viewer" style="height: 460px;">
-    <img id="car-fallback" src="car.png" alt="Aerial A1 model" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:0;" />
+
     <div class="label">AERIAL A1 · SCALE MODEL · DRAG TO ROTATE</div>
     <div id="car-loading" style="position:absolute;inset:0;display:grid;place-items:center;color:var(--turq);font-family:'Orbitron',sans-serif;letter-spacing:3px;font-size:0.9rem;z-index:2;">LOADING MODEL...</div>
   </div>
@@ -365,7 +365,6 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 const container = document.getElementById('car-viewer');
 if (container) {
   const loadingEl = document.getElementById('car-loading');
-  const fallbackEl = document.getElementById('car-fallback');
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(0x0a1a2e);
   const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
@@ -431,7 +430,6 @@ if (container) {
     camera.lookAt(0, 0, 0);
     controls.update();
     if (loadingEl) loadingEl.style.display = 'none';
-    if (fallbackEl) fallbackEl.style.display = 'none';
   }, undefined, (err) => {
     console.error('STL load error', err);
     if (loadingEl) loadingEl.textContent = 'FAILED TO LOAD MODEL';
