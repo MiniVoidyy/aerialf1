@@ -367,8 +367,7 @@ if (container) {
   renderer.setSize(container.clientWidth, container.clientHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
-  renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  // shadows disabled for clarity
   container.appendChild(renderer.domElement);
   // env map disabled for brighter base color visibility
 
@@ -396,41 +395,26 @@ if (container) {
   // ground plane removed for clarity
 
   const material = new THREE.MeshStandardMaterial({
-    color: 0x00ffff,
-    metalness: 0.1,
-    roughness: 0.6,
-    emissive: 0x003344,
-    emissiveIntensity: 0.1,
+    color: 0x00e5ff,
+    metalness: 0.2,
+    roughness: 0.5,
+    emissive: 0x001a22,
+    emissiveIntensity: 0.05,
     side: THREE.DoubleSide
   });
-  const wireMaterial = new THREE.MeshBasicMaterial({
-    color: 0x00e5ff,
-    wireframe: true,
-    transparent: true,
-    opacity: 0.18
-  });
-  const grid = new THREE.GridHelper(4, 20, 0x00e5ff, 0x003344);
-  grid.material.opacity = 0.35;
-  grid.material.transparent = true;
-  scene.add(grid);
 
   const loader = new STLLoader();
   loader.load('car.stl', (geometry) => {
     geometry.computeVertexNormals();
     const mesh = new THREE.Mesh(geometry, material);
-    mesh.castShadow = true;
-    const wire = new THREE.Mesh(geometry, wireMaterial);
     const box = new THREE.Box3().setFromObject(mesh);
     const center = box.getCenter(new THREE.Vector3());
     const size = box.getSize(new THREE.Vector3());
     mesh.position.sub(center);
-    wire.position.copy(mesh.position);
     const maxDim = Math.max(size.x, size.y, size.z);
-    const scale = 3.2 / maxDim;
+    const scale = 3.6 / maxDim;
     mesh.scale.setScalar(scale);
-    wire.scale.setScalar(scale);
     scene.add(mesh);
-    scene.add(wire);
     // fit camera
     const dist = maxDim * scale * 1.6;
     camera.position.set(dist * 0.8, dist * 0.5, dist * 1.0);
