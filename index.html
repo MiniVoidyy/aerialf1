@@ -3,13 +3,332 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Aerial F1</title>
+<title>Aerial F1 Team</title>
+<meta name="description" content="Aerial Racing — Formula 1 team. Turquoise speed, precision engineering.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-body { font-family: system-ui, sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; background: #0b0f1a; color: #fff; }
-h1 { font-size: 3rem; letter-spacing: 2px; }
+:root {
+  --bg: #050a14;
+  --bg2: #0a1628;
+  --turq: #00e5ff;
+  --turq2: #00bcd4;
+  --turq3: #00838f;
+  --turq-dim: rgba(0, 229, 255, 0.12);
+  --text: #e8f4f8;
+  --muted: #8aa4b8;
+  --card: rgba(10, 22, 40, 0.6);
+  --border: rgba(0, 229, 255, 0.25);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 10%, rgba(0, 229, 255, 0.15), transparent 50%),
+    radial-gradient(ellipse at 80% 90%, rgba(0, 188, 212, 0.12), transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 48px;
+  background: rgba(5, 10, 20, 0.7);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+.logo {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900; font-size: 1.4rem; letter-spacing: 3px;
+  color: var(--turq);
+  text-shadow: 0 0 18px rgba(0, 229, 255, 0.5);
+}
+.logo span { color: #fff; }
+nav ul { list-style: none; display: flex; gap: 32px; }
+nav a { color: var(--muted); text-decoration: none; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; transition: color .3s; }
+nav a:hover { color: var(--turq); }
+.hero {
+  position: relative; z-index: 1;
+  min-height: 100vh;
+  display: grid; place-items: center;
+  padding: 120px 48px 80px;
+  text-align: center;
+}
+.hero .tag {
+  display: inline-block;
+  padding: 8px 18px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--turq);
+  font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase;
+  background: var(--turq-dim);
+  margin-bottom: 28px;
+  animation: fadeUp .8s ease both;
+}
+.hero h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900;
+  font-size: clamp(3rem, 10vw, 8rem);
+  line-height: 0.95;
+  letter-spacing: -2px;
+  background: linear-gradient(180deg, #fff 0%, var(--turq) 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: fadeUp .9s .1s ease both;
+}
+.hero h1 .stroke { -webkit-text-stroke: 2px var(--turq); -webkit-text-fill-color: transparent; }
+.hero p {
+  max-width: 620px; margin: 28px auto 40px;
+  color: var(--muted); font-size: 1.1rem;
+  animation: fadeUp 1s .2s ease both;
+}
+.cta {
+  display: inline-flex; gap: 16px; flex-wrap: wrap; justify-content: center;
+  animation: fadeUp 1s .3s ease both;
+}
+.btn {
+  padding: 14px 32px; border-radius: 8px; font-weight: 600; font-size: 0.9rem;
+  letter-spacing: 2px; text-transform: uppercase; text-decoration: none;
+  transition: transform .2s, box-shadow .2s, background .2s;
+  cursor: pointer; border: none;
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--turq), var(--turq2));
+  color: #001018;
+  box-shadow: 0 0 30px rgba(0, 229, 255, 0.4);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 45px rgba(0, 229, 255, 0.7); }
+.btn-ghost {
+  background: transparent; color: var(--turq);
+  border: 1px solid var(--border);
+}
+.btn-ghost:hover { background: var(--turq-dim); transform: translateY(-2px); }
+.stats {
+  position: relative; z-index: 1;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+  max-width: 1100px; margin: -60px auto 0; padding: 0 48px;
+}
+.stat {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 14px; padding: 28px; text-align: center;
+  backdrop-filter: blur(8px);
+  transition: transform .3s, border-color .3s;
+}
+.stat:hover { transform: translateY(-4px); border-color: var(--turq); }
+.stat .num {
+  font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 2.4rem;
+  color: var(--turq); text-shadow: 0 0 20px rgba(0, 229, 255, 0.4);
+}
+.stat .lbl { color: var(--muted); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; margin-top: 6px; }
+section {
+  position: relative; z-index: 1;
+  padding: 120px 48px;
+  max-width: 1200px; margin: 0 auto;
+}
+.section-tag {
+  color: var(--turq); font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase;
+  margin-bottom: 16px; display: flex; align-items: center; gap: 12px;
+}
+.section-tag::before { content: ''; width: 40px; height: 1px; background: var(--turq); }
+section h2 {
+  font-family: 'Orbitron', sans-serif; font-weight: 700;
+  font-size: clamp(2rem, 5vw, 3.2rem); margin-bottom: 20px; line-height: 1.1;
+}
+section .lead { color: var(--muted); max-width: 640px; font-size: 1.05rem; margin-bottom: 56px; }
+.grid { display: grid; gap: 24px; }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 16px; padding: 32px; overflow: hidden;
+  transition: transform .35s, border-color .35s, box-shadow .35s;
+  position: relative;
+}
+.card::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, var(--turq-dim), transparent);
+  opacity: 0; transition: opacity .35s; pointer-events: none;
+}
+.card:hover { transform: translateY(-6px); border-color: var(--turq); box-shadow: 0 20px 60px rgba(0, 229, 255, 0.15); }
+.card:hover::after { opacity: 1; }
+.card h3 { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; margin-bottom: 10px; color: var(--turq); }
+.card p { color: var(--muted); font-size: 0.95rem; }
+.driver {
+  display: flex; align-items: center; gap: 20px;
+}
+.driver .avatar {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--turq3), var(--turq));
+  display: grid; place-items: center;
+  font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 1.4rem; color: #001018;
+  box-shadow: 0 0 25px rgba(0, 229, 255, 0.4);
+  flex-shrink: 0;
+}
+.driver .info h3 { color: var(--text); margin-bottom: 2px; }
+.driver .info .role { color: var(--turq); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; }
+.driver .info p { margin-top: 6px; }
+.car {
+  position: relative; height: 260px;
+  background: linear-gradient(135deg, var(--bg2), #0d2240);
+  border-radius: 16px; border: 1px solid var(--border);
+  overflow: hidden; display: grid; place-items: center;
+}
+.car .shape {
+  width: 70%; height: 60%;
+  background: linear-gradient(90deg, var(--turq3), var(--turq), var(--turq2));
+  clip-path: polygon(0 40%, 15% 20%, 60% 15%, 100% 30%, 100% 70%, 60% 85%, 15% 80%, 0 60%);
+  filter: drop-shadow(0 0 30px rgba(0, 229, 255, 0.6));
+  animation: float 4s ease-in-out infinite;
+}
+.car .label {
+  position: absolute; bottom: 18px; left: 24px;
+  font-family: 'Orbitron', sans-serif; font-size: 0.9rem; letter-spacing: 3px; color: var(--turq);
+}
+.schedule { display: flex; flex-direction: column; gap: 12px; }
+.race {
+  display: grid; grid-template-columns: 60px 1fr auto; gap: 20px; align-items: center;
+  padding: 18px 24px; background: var(--card); border: 1px solid var(--border);
+  border-radius: 12px; transition: border-color .3s, transform .3s;
+}
+.race:hover { border-color: var(--turq); transform: translateX(6px); }
+.race .round { font-family: 'Orbitron', sans-serif; font-weight: 700; color: var(--turq); }
+.race .name { font-weight: 600; }
+.race .date { color: var(--muted); font-size: 0.85rem; }
+footer {
+  position: relative; z-index: 1;
+  padding: 48px; text-align: center; color: var(--muted);
+  border-top: 1px solid var(--border);
+  font-size: 0.85rem; letter-spacing: 1px;
+}
+footer .logo { font-size: 1rem; display: block; margin-bottom: 12px; }
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity .8s, transform .8s; }
+.reveal.in { opacity: 1; transform: none; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+@keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+@media (max-width: 900px) {
+  nav { padding: 14px 20px; }
+  nav ul { gap: 16px; }
+  section, .hero { padding-left: 20px; padding-right: 20px; }
+  .stats { grid-template-columns: repeat(2, 1fr); margin-top: 0; padding: 0 20px; }
+  .grid-3, .grid-2 { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
-<h1>Aerial F1</h1>
+<nav>
+  <div class="logo">AERIAL<span> F1</span></div>
+  <ul>
+    <li><a href="#about">Team</a></li>
+    <li><a href="#drivers">Drivers</a></li>
+    <li><a href="#car">Car</a></li>
+    <li><a href="#calendar">Calendar</a></li>
+  </ul>
+</nav>
+
+<header class="hero">
+  <div>
+    <span class="tag">Formula 1 · Season 2026</span>
+    <h1>AERIAL<span class="stroke"> RACING</span></h1>
+    <p>Born from the sky. Engineered for the ground. Aerial Racing brings turquoise speed to the pinnacle of motorsport — precision, passion, and pure velocity.</p>
+    <div class="cta">
+      <a class="btn btn-primary" href="#about">Discover the Team</a>
+      <a class="btn btn-ghost" href="#calendar">Race Calendar</a>
+    </div>
+  </div>
+</header>
+
+<div class="stats">
+  <div class="stat"><div class="num">47</div><div class="lbl">Race Wins</div></div>
+  <div class="stat"><div class="num">3</div><div class="lbl">Constructors' Titles</div></div>
+  <div class="stat"><div class="num">89</div><div class="lbl">Podiums</div></div>
+  <div class="stat"><div class="num">12</div><div class="lbl">Pole Positions</div></div>
+</div>
+
+<section id="about">
+  <div class="section-tag">The Team</div>
+  <h2>Built to fly.<br>Engineered to win.</h2>
+  <p class="lead">Aerial Racing was founded on a single belief: that the line between aviation and motorsport is thinner than it looks. Every curve, every gram, every airflow decision is treated like an aircraft — because at 340 km/h, that's exactly what the car becomes.</p>
+  <div class="grid grid-3">
+    <div class="card reveal"><h3>Precision Aero</h3><p>Wind-tunnel developed aero packages tuned for maximum downforce with minimal drag, inspired by aerospace engineering.</p></div>
+    <div class="card reveal"><h3>Turquoise Power</h3><p>A hybrid power unit delivering relentless torque, wrapped in our signature turquoise livery that cuts through the grid.</p></div>
+    <div class="card reveal"><h3>Race Intelligence</h3><p>Real-time telemetry and AI-assisted strategy, turning every lap into a data-driven advantage.</p></div>
+  </div>
+</section>
+
+<section id="drivers">
+  <div class="section-tag">Drivers</div>
+  <h2>The pilots.</h2>
+  <p class="lead">Two drivers, one mission — push the Aerial A1 to its absolute limit, every single weekend.</p>
+  <div class="grid grid-2">
+    <div class="card reveal driver">
+      <div class="avatar">MV</div>
+      <div class="info">
+        <div class="role">Driver 01</div>
+        <h3>Marcus Voss</h3>
+        <p>Championship contender. Known for late-braking overtakes and ice-cold race craft under pressure.</p>
+      </div>
+    </div>
+    <div class="card reveal driver">
+      <div class="avatar">LK</div>
+      <div class="info">
+        <div class="role">Driver 02</div>
+        <h3>Lena Kovač</h3>
+        <p>Rising star. Blistering one-lap pace and fearless wheel-to-wheel racing through the field.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="car">
+  <div class="section-tag">The Car</div>
+  <h2>Aerial A1 — 2026.</h2>
+  <p class="lead">A ground-effect masterpiece. Every surface shaped by airflow, every detail tuned for the turquoise blur.</p>
+  <div class="car reveal">
+    <div class="shape"></div>
+    <div class="label">AERIAL A1 · 2026</div>
+  </div>
+  <div class="grid grid-3" style="margin-top: 32px;">
+    <div class="card reveal"><h3>Power Unit</h3><p>1.6L V6 Turbo Hybrid · 1000+ hp combined output.</p></div>
+    <div class="card reveal"><h3>Chassis</h3><p>Carbon-fibre monocoque, aerospace-grade, ultra-lightweight.</p></div>
+    <div class="card reveal"><h3>Aero</h3><p>Active aero front wing, DRS-integrated rear wing.</p></div>
+  </div>
+</section>
+
+<section id="calendar">
+  <div class="section-tag">Calendar</div>
+  <h2>2026 Race Calendar.</h2>
+  <p class="lead">Twenty-four rounds. One turquoise line cutting across the world.</p>
+  <div class="schedule">
+    <div class="race reveal"><div class="round">R01</div><div><div class="name">Bahrain Grand Prix</div><div class="date">Sakhir · Mar 8</div></div><div class="date">Race</div></div>
+    <div class="race reveal"><div class="round">R02</div><div><div class="name">Saudi Arabian Grand Prix</div><div class="date">Jeddah · Mar 22</div></div><div class="date">Race</div></div>
+    <div class="race reveal"><div class="round">R03</div><div><div class="name">Australian Grand Prix</div><div class="date">Melbourne · Apr 5</div></div><div class="date">Race</div></div>
+    <div class="race reveal"><div class="round">R04</div><div><div class="name">Japanese Grand Prix</div><div class="date">Suzuka · Apr 19</div></div><div class="date">Race</div></div>
+    <div class="race reveal"><div class="round">R05</div><div><div class="name">Miami Grand Prix</div><div class="date">Miami · May 3</div></div><div class="date">Race</div></div>
+  </div>
+</section>
+
+<footer>
+  <span class="logo">AERIAL F1</span>
+  © 2026 Aerial Racing Team. All rights reserved.<br>
+  Fan-made concept site · Not affiliated with Formula 1.
+</footer>
+
+<script>
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
 </body>
 </html>
