@@ -313,9 +313,8 @@ footer .logo { font-size: 1rem; display: block; margin-bottom: 12px; }
   <div class="section-tag">The Car</div>
   <h2>Aerial A1 — scale model.</h2>
   <p class="lead">A miniature F1 car built to F1 in Schools regulations, powered by compressed air.</p>
-  <div class="car reveal">
-    <div class="shape"></div>
-    <div class="label">AERIAL A1 · SCALE MODEL</div>
+  <div class="car reveal" id="car-viewer" style="height: 460px;">
+    <div class="label">AERIAL A1 · SCALE MODEL · DRAG TO ROTATE</div>
   </div>
   <div class="grid grid-3" style="margin-top: 32px;">
     <div class="card reveal"><h3>Power</h3><p>Compressed-air CO₂ cartridge, regulated for consistent launches.</p></div>
@@ -342,6 +341,80 @@ footer .logo { font-size: 1rem; display: block; margin-bottom: 12px; }
   Built with care by the Aerial Racing team.
 </footer>
 
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { STLLoader } from 'three/addons/loaders/STLLoader.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+const container = document.getElementById('car-viewer');
+if (container) {
+  const scene = new THREE.Scene();
+  scene.background = null;
+  const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
+  camera.position.set(0, 0, 4);
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setSize(container.clientWidth, container.clientHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  container.appendChild(renderer.domElement);
+
+  const controls = new OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.08;
+  controls.autoRotate = true;
+  controls.autoRotateSpeed = 1.2;
+  controls.enablePan = false;
+
+  scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+  const key = new THREE.DirectionalLight(0x00e5ff, 1.2);
+  key.position.set(3, 4, 5);
+  scene.add(key);
+  const rim = new THREE.DirectionalLight(0x00bcd4, 0.8);
+  rim.position.set(-4, 2, -3);
+  scene.add(rim);
+
+  const material = new THREE.MeshStandardMaterial({
+    color: 0x00bcd4,
+    metalness: 0.6,
+    roughness: 0.35,
+    emissive: 0x003344,
+    emissiveIntensity: 0.25
+  });
+
+  const loader = new STLLoader();
+  loader.load('car.stl', (geometry) => {
+    geometry.computeVertexNormals();
+    const mesh = new THREE.Mesh(geometry, material);
+    const box = new THREE.Box3().setFromObject(mesh);
+    const center = box.getCenter(new THREE.Vector3());
+    const size = box.getSize(new THREE.Vector3());
+    mesh.position.sub(center);
+    const scale = 2.6 / Math.max(size.x, size.y, size.z);
+    mesh.scale.setScalar(scale);
+    scene.add(mesh);
+  }, undefined, (err) => { console.error('STL load error', err); });
+
+  function animate() {
+    requestAnimationFrame(animate);
+    controls.update();
+    renderer.render(scene, camera);
+  }
+  animate();
+
+  window.addEventListener('resize', () => {
+    camera.aspect = container.clientWidth / container.clientHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(container.clientWidth, container.clientHeight);
+  });
+}
+</script>
 <script>
 const io = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
