@@ -21,7 +21,7 @@
   --turq-dim: rgba(0, 229, 255, 0.12);
   --text: #e8f4f8;
   --muted: #8aa4b8;
-  --card: rgba(10, 22, 40, 0.6);
+  --card: rgba(10, 22, 40, 0.3);
   --border: rgba(0, 229, 255, 0.25);
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -67,9 +67,9 @@ nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 50;
   display: flex; align-items: center; justify-content: space-between;
   padding: 18px 48px;
-  background: rgba(5, 10, 20, 0.55);
-  backdrop-filter: blur(12px) saturate(150%);
-  -webkit-backdrop-filter: blur(12px) saturate(150%);
+  background: rgba(5, 10, 20, 0.25);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
   border-bottom: 1px solid var(--border);
 }
 .logo {
@@ -159,8 +159,8 @@ section .lead { color: var(--muted); max-width: 640px; font-size: 1.05rem; margi
 .card {
   background: var(--card); border: 1px solid var(--border);
   border-radius: 16px; padding: 32px; overflow: hidden;
-  backdrop-filter: blur(12px) saturate(150%);
-  -webkit-backdrop-filter: blur(12px) saturate(150%);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
   transition: transform .35s, border-color .35s, box-shadow .35s;
   position: relative;
 }
@@ -191,8 +191,8 @@ section .lead { color: var(--muted); max-width: 640px; font-size: 1.05rem; margi
   position: relative; height: 260px;
   background: linear-gradient(135deg, var(--bg2), #0d2240);
   border-radius: 16px; border: 1px solid var(--border);
-  backdrop-filter: blur(12px) saturate(150%);
-  -webkit-backdrop-filter: blur(12px) saturate(150%);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
   overflow: hidden; display: grid; place-items: center;
 }
 .car .shape {
