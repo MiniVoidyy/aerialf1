@@ -42,12 +42,12 @@ body::before {
     radial-gradient(ellipse at 80% 90%, rgba(0, 188, 212, 0.14), transparent 50%);
   pointer-events: none;
   z-index: 0;
-  filter: blur(40px);
+  filter: blur(60px);
 }
 .blur-orb {
   position: fixed;
   border-radius: 50%;
-  filter: blur(80px);
+  filter: blur(110px);
   opacity: 0.55;
   pointer-events: none;
   z-index: 0;
@@ -66,15 +66,15 @@ nav {
   display: flex; align-items: center; justify-content: space-between;
   padding: 18px 48px;
   background: rgba(5, 10, 20, 0.55);
-  backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  backdrop-filter: blur(32px) saturate(150%);
+  -webkit-backdrop-filter: blur(32px) saturate(150%);
   border-bottom: 1px solid var(--border);
 }
 .logo {
   font-family: 'Orbitron', sans-serif;
   font-weight: 900; font-size: 1.4rem; letter-spacing: 3px;
   color: var(--turq);
-  text-shadow: 0 0 18px rgba(0, 229, 255, 0.5);
+  text-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
 }
 .logo span { color: #fff; }
 nav ul { list-style: none; display: flex; gap: 32px; }
@@ -128,9 +128,9 @@ nav a:hover { color: var(--turq); }
 .btn-primary {
   background: linear-gradient(135deg, var(--turq), var(--turq2));
   color: #001018;
-  box-shadow: 0 0 30px rgba(0, 229, 255, 0.4);
+  box-shadow: 0 0 18px rgba(0, 229, 255, 0.25);
 }
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 45px rgba(0, 229, 255, 0.7); }
+.btn-primary:hover { transform: translateY(-2px);   box-shadow: 0 0 28px rgba(0, 229, 255, 0.4); }
 .btn-ghost {
   background: transparent; color: var(--turq);
   border: 1px solid var(--border);
@@ -157,8 +157,8 @@ section .lead { color: var(--muted); max-width: 640px; font-size: 1.05rem; margi
 .card {
   background: var(--card); border: 1px solid var(--border);
   border-radius: 16px; padding: 32px; overflow: hidden;
-  backdrop-filter: blur(16px) saturate(140%);
-  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  backdrop-filter: blur(24px) saturate(130%);
+  -webkit-backdrop-filter: blur(24px) saturate(130%);
   transition: transform .35s, border-color .35s, box-shadow .35s;
   position: relative;
 }
@@ -179,7 +179,7 @@ section .lead { color: var(--muted); max-width: 640px; font-size: 1.05rem; margi
   background: linear-gradient(135deg, var(--turq3), var(--turq));
   display: grid; place-items: center;
   font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 1.1rem; color: #001018;
-  box-shadow: 0 0 25px rgba(0, 229, 255, 0.4);
+  box-shadow: 0 0 14px rgba(0, 229, 255, 0.25);
   flex-shrink: 0;
 }
 .member .info h3 { color: var(--text); margin-bottom: 2px; font-size: 1rem; }
@@ -189,8 +189,8 @@ section .lead { color: var(--muted); max-width: 640px; font-size: 1.05rem; margi
   position: relative; height: 260px;
   background: linear-gradient(135deg, var(--bg2), #0d2240);
   border-radius: 16px; border: 1px solid var(--border);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
   overflow: hidden; display: grid; place-items: center;
 }
 .car .shape {
@@ -208,8 +208,8 @@ section .lead { color: var(--muted); max-width: 640px; font-size: 1.05rem; margi
 .milestone {
   display: grid; grid-template-columns: 80px 1fr; gap: 20px; align-items: center;
   padding: 18px 24px; background: var(--card); border: 1px solid var(--border);
-  border-radius: 12px; backdrop-filter: blur(14px) saturate(140%);
-  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border-radius: 12px; backdrop-filter: blur(20px) saturate(130%);
+  -webkit-backdrop-filter: blur(20px) saturate(130%);
   transition: border-color .3s, transform .3s;
 }
 .milestone:hover { border-color: var(--turq); transform: translateX(6px); }
